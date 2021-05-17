@@ -10,5 +10,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        User user = this.getIntent().getParcelableExtra("user");
+        System.out.println("USER MAIN!!::  " + user);
     }
 }
