@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Android</string>
     <string name="password">Edit Text Password</string>
+    <string name="consum">Introducere consum</string>
+    <string name="anunturi">Anunturi</string>
+    <string name="plata_intretinere">Plata intretinere</string>
+    <string name="avizier">Avizier</string>
 </resources>
