@@ -33,6 +33,7 @@ public class IntroducereConsumActivity extends AppCompatActivity {
     private EditText editTextApaCaldaBucatarie;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +46,7 @@ public class IntroducereConsumActivity extends AppCompatActivity {
         editTextApaReceBaieMare = findViewById(R.id.editTextApaReceBaieMare);
         editTextApaReceBaieMica = findViewById(R.id.editTextApaReceBaieMica);
         editTextApaReceBucatarie = findViewById(R.id.editTextApaReceBucatarie);
+
 
 
     }
@@ -83,13 +85,22 @@ public class IntroducereConsumActivity extends AppCompatActivity {
             valori.put("apaCaldaBucatarie","0");
         }
 
+
         valori.put("apartament", ""+user.getApartament());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            valori.put("luna", "" + DateHelper.getMonth());
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            valori.put("an", "" + DateHelper.getYear());
+        }
 
         valori.forEach((val,key)-> System.out.println(val  + " "+ key));
 
         JSONObject jsonObject = new JSONObject(valori);
 
-        String url = "http://10.0.1.2:8080/consum/locatar";
+        String url = "http://10.0.1.2:8080/consum/locatar/create/" + user.getId();
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
