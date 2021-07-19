@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://10.0.1.2:8080/user/login/pls";
+        String url = "http://192.168.1.144:8080/user/login/pls";
         JSONObject accountJSON = new JSONObject();
         accountJSON.put("email",email);
         accountJSON.put("password",pass);
@@ -54,8 +54,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                try {
                    user = new User(response.getInt("id"), response.getString("lastName"), response.getString("firstName"), response.getString("email"), response.getString("password"),
-                           response.getInt("phoneNumber"), response.getInt("accountType"), response.getInt("scara"), response.getInt("apartament"), response.getInt("nrPersoane"), response.getDouble("cotaIndiviza"));
+                           response.getInt("phoneNumber"), response.getInt("accountType"), response.getInt("scara"), response.getInt("apartament"), response.getInt("nrPersoane"), response.getDouble("cotaIndiviza"), response.getJSONObject("bloc").getInt("numarBloc"));
                    System.out.println(user);
+                   System.out.println(user.getNumarBloc());
                    Intent it = new Intent(getApplicationContext(),MainActivity.class);
                    it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                    it.putExtra("user",user);
@@ -68,7 +69,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 System.out.println(error.getMessage());
-                System.out.println("LMAO");
             }
         });
 

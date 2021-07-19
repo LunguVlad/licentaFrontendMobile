@@ -23,12 +23,25 @@ public class MainActivity extends AppCompatActivity {
         user = getIntent().getParcelableExtra("user");
 
         this.textViewWelcome = this.findViewById(R.id.textViewWelcome);
-        this.textViewWelcome.setText("Welcome " + user.getFirstName());
+        this.textViewWelcome.setText("Bine ai venit, " + user.getFirstName()+ "!");
+
+
 
     }
 
     public void introducereConsumOnClick(View view) {
         Intent it = new Intent(this,IntroducereConsumActivity.class);
+        it.putExtra("user",user);
+        this.startActivity(it);
+    }
+
+    public void clickAvizier(View view) {
+        Intent it = new Intent(this,AvizierActivity.class);
+        this.startActivity(it);
+    }
+
+    public void clickPlateste(View view){
+        Intent it = new Intent(this,PaymentActivity.class);
         it.putExtra("user",user);
         this.startActivity(it);
     }

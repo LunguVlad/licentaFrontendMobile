@@ -14,9 +14,10 @@ public class User implements Parcelable {
     private int scara;
     private int apartament;
     private int nrPersoane;
+    private int numarBloc;
     private double cotaIndiviza;
 
-    public User(int id, String lastName, String firstName, String email, String password, int phoneNumber, int accountType, int scara, int apartament, int nrPersoane, double cotaIndiviza) {
+    public User(int id, String lastName, String firstName, String email, String password, int phoneNumber, int accountType, int scara, int apartament, int nrPersoane, double cotaIndiviza, int numarBloc) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -28,6 +29,7 @@ public class User implements Parcelable {
         this.apartament = apartament;
         this.nrPersoane = nrPersoane;
         this.cotaIndiviza = cotaIndiviza;
+        this.numarBloc = numarBloc;
     }
 
     protected User(Parcel in) {
@@ -42,6 +44,7 @@ public class User implements Parcelable {
         apartament = in.readInt();
         nrPersoane = in.readInt();
         cotaIndiviza = in.readDouble();
+        numarBloc = in.readInt();
     }
 
     @Override
@@ -57,6 +60,7 @@ public class User implements Parcelable {
         dest.writeInt(apartament);
         dest.writeInt(nrPersoane);
         dest.writeDouble(cotaIndiviza);
+        dest.writeInt(numarBloc);
     }
 
     @Override
@@ -75,6 +79,14 @@ public class User implements Parcelable {
             return new User[size];
         }
     };
+
+    public int getNumarBloc() {
+        return numarBloc;
+    }
+
+    public void setNumarBloc(int numarBloc) {
+        this.numarBloc = numarBloc;
+    }
 
     public int getId() {
         return id;

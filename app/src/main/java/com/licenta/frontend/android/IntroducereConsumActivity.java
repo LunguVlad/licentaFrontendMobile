@@ -1,13 +1,28 @@
 package com.licenta.frontend.android;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.hardware.Camera;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,6 +34,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +47,8 @@ public class IntroducereConsumActivity extends AppCompatActivity {
     private EditText editTextApaCaldaBaieMare;
     private EditText editTextApaCaldaBaieMica;
     private EditText editTextApaCaldaBucatarie;
+    private final int TAKE_PICTURE = 1;
+    private Uri imageUri;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -46,6 +64,11 @@ public class IntroducereConsumActivity extends AppCompatActivity {
         editTextApaReceBaieMare = findViewById(R.id.editTextApaReceBaieMare);
         editTextApaReceBaieMica = findViewById(R.id.editTextApaReceBaieMica);
         editTextApaReceBucatarie = findViewById(R.id.editTextApaReceBucatarie);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_DENIED){
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},1);
+        }
 
 
 
@@ -100,7 +123,7 @@ public class IntroducereConsumActivity extends AppCompatActivity {
 
         JSONObject jsonObject = new JSONObject(valori);
 
-        String url = "http://10.0.1.2:8080/consum/locatar/create/" + user.getId();
+        String url = "http://192.168.1.144:8080/consum/locatar/create/" + user.getId();
 
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -120,4 +143,23 @@ public class IntroducereConsumActivity extends AppCompatActivity {
         queue.add(jsonObjectRequest);
 
     }
-}
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == TAKE_PICTURE) {
+            System.out.println("CHECK");
+            String result = data.toURI();
+            System.out.println(result);
+        }
+    }
+
+    public void takePhoto() {
+
+    }
+
+    public void openCamera(View view) {
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        startActivity(intent);
+
+}}

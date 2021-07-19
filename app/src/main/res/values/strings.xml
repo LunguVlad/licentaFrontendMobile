@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Android</string>
+    <string name="app_name">iBloc</string>
     <string name="password">Edit Text Password</string>
     <string name="consum">Introducere consum</string>
     <string name="anunturi">Anunturi</string>
