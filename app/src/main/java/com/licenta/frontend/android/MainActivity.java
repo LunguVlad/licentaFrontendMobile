@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.licenta.frontend.android.models.User;
+
 public class MainActivity extends AppCompatActivity {
 
     private User user;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickAvizier(View view) {
         Intent it = new Intent(this,AvizierActivity.class);
+        it.putExtra("numarBloc",user.getNumarBloc());
         this.startActivity(it);
     }
 

@@ -11,11 +11,25 @@
         android:text="Apartament"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
     <TextView
+        android:id="@+id/scara"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Scara"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+    <TextView
         android:id="@+id/enel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="Enel + Gaze"
+        android:text="Enel"
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
+    <TextView
+        android:id="@+id/suez"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Suez"
         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
     <TextView
@@ -35,11 +49,49 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
-        android:id="@+id/cheltComune"
+        android:id="@+id/diferentaApaCalda"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Diferenta apa calda"
+        android:layout_marginLeft="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"  />
+
+    <TextView
+        android:id="@+id/diferentaApaRece"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:text="Cheltuieli comune"
+        android:text="Diferenta apa rece"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/cheltComuneCotaIndiv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Cheltuieli comune cota indiviza"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <TextView
+        android:id="@+id/cheltComuneNumarPersoane"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Cheltuieli comune numar persoane"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <TextView
+        android:id="@+id/cheltComuneNumarApartamente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Cheltuieli comune numar apartamente"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/restanteIntretinere"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:text="Restante intretinere "
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView

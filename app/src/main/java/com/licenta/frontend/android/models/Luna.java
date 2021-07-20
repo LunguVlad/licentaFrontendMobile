@@ -1,4 +1,4 @@
-package com.licenta.frontend.android;
+package com.licenta.frontend.android.models;
 
 public enum Luna {
     Ianuarie("1"),

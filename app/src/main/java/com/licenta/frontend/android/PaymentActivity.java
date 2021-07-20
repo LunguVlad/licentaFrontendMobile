@@ -1,6 +1,5 @@
 package com.licenta.frontend.android;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -20,6 +19,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.licenta.frontend.android.models.Luna;
+import com.licenta.frontend.android.models.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -30,9 +30,10 @@
 
         <ImageButton
             android:layout_gravity="center"
-            android:id="@+id/imageButton3"
+            android:id="@+id/buttonApaReceBaiaMare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="openCamera"
             app:srcCompat="@android:drawable/ic_menu_camera" />
 
     </LinearLayout>
@@ -61,11 +62,11 @@
 
         <ImageButton
             android:layout_gravity="center"
-            android:id="@+id/imageButton4"
+            android:id="@+id/buttonApaReceBaiaMica"
             app:srcCompat="@android:drawable/ic_menu_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-             />
+            android:onClick="openCamera" />
 
     </LinearLayout>
 
@@ -92,11 +93,11 @@
 
         <ImageButton
             android:layout_gravity="center"
-            android:id="@+id/imageButton5"
+            android:id="@+id/buttonApaReceBucatarie"
             app:srcCompat="@android:drawable/ic_menu_camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            android:onClick="openCamera" />
 
     </LinearLayout>
 
@@ -123,10 +124,11 @@
 
         <ImageButton
             android:layout_gravity="center"
-            android:id="@+id/imageButton6"
+            android:id="@+id/buttonApaCaldaBaiaMare"
             app:srcCompat="@android:drawable/ic_menu_camera"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:onClick="openCamera"/>
 
     </LinearLayout>
 
@@ -154,9 +156,10 @@
 
         <ImageButton
             android:layout_gravity="center"
-            android:id="@+id/imageButton2"
+            android:id="@+id/buttonApaCaldaBaiaMica"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="openCamera"
             app:srcCompat="@android:drawable/ic_menu_camera" />
 
     </LinearLayout>
@@ -187,7 +190,7 @@
 
         <ImageButton
             android:layout_gravity="center"
-            android:id="@+id/imageButton"
+            android:id="@+id/buttonApaCaldaBucatarie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="openCamera"

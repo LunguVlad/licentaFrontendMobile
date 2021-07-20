@@ -1,4 +1,4 @@
-package com.licenta.frontend.android;
+package com.licenta.frontend.android.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

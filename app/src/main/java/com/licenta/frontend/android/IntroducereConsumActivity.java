@@ -1,6 +1,6 @@
 package com.licenta.frontend.android;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -8,21 +8,15 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.hardware.Camera;
-import android.net.Uri;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,11 +24,19 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.text.Text;
+import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.TextRecognizer;
+import com.google.mlkit.vision.text.TextRecognizerOptions;
+import com.licenta.frontend.android.models.User;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,7 +50,6 @@ public class IntroducereConsumActivity extends AppCompatActivity {
     private EditText editTextApaCaldaBaieMica;
     private EditText editTextApaCaldaBucatarie;
     private final int TAKE_PICTURE = 1;
-    private Uri imageUri;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -109,7 +110,7 @@ public class IntroducereConsumActivity extends AppCompatActivity {
         }
 
 
-        valori.put("apartament", ""+user.getApartament());
+        valori.put("apartament", "" + user.getApartament());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             valori.put("luna", "" + DateHelper.getMonth());
@@ -147,19 +148,83 @@ public class IntroducereConsumActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK && requestCode == TAKE_PICTURE) {
-            System.out.println("CHECK");
-            String result = data.toURI();
-            System.out.println(result);
+
+        Bitmap photo = (Bitmap) data.getExtras().get("data");
+
+        InputImage image = InputImage.fromBitmap(photo,0);
+
+        if (resultCode == Activity.RESULT_OK && requestCode == 0) {
+            processImage(image,editTextApaReceBaieMare);
+        }
+        if (resultCode == Activity.RESULT_OK && requestCode == 1) {
+            processImage(image,editTextApaReceBaieMica);
+        }
+        if (resultCode == Activity.RESULT_OK && requestCode == 2) {
+            processImage(image,editTextApaReceBucatarie);
+        }
+        if (resultCode == Activity.RESULT_OK && requestCode == 3) {
+            processImage(image,editTextApaCaldaBaieMare);
+        }
+        if (resultCode == Activity.RESULT_OK && requestCode == 4) {
+            processImage(image,editTextApaCaldaBaieMica);
+        }
+        if (resultCode == Activity.RESULT_OK && requestCode == 5) {
+            processImage(image,editTextApaCaldaBucatarie);
         }
     }
 
-    public void takePhoto() {
+    public void processImage(InputImage image, EditText editText){
 
+        TextRecognizer recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
+
+        Task<Text> result = recognizer.process(image).addOnSuccessListener(new OnSuccessListener<Text>() {
+            @Override
+            public void onSuccess(@NonNull Text text) {
+
+                for(Text.TextBlock block : text.getTextBlocks()){
+                    Rect boundingBox = block.getBoundingBox();
+                    Point[] cornerPoints = block.getCornerPoints();
+                    String info = block.getText();
+                    System.out.println(info);
+                }
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                })
+                .addOnCompleteListener(new OnCompleteListener<Text>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Text> task) {
+                        String resultText = task.getResult().getText();
+                        //System.out.println(resultText.replaceAll("[^0-9]",""));
+                        String formattedResult = resultText.replaceAll("[^0-9]","");
+                        editText.setText(formattedResult);
+                    }
+                });
     }
 
     public void openCamera(View view) {
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
-        startActivity(intent);
+        if(view.getId() == R.id.buttonApaReceBaiaMare){
+            startActivityForResult(intent, 0);
+        }
+        if(view.getId() == R.id.buttonApaReceBaiaMica){
+            startActivityForResult(intent, 1);
+        }
+        if(view.getId() == R.id.buttonApaReceBucatarie){
+            startActivityForResult(intent, 2);
+        }
+        if(view.getId() == R.id.buttonApaCaldaBaiaMare){
+            startActivityForResult(intent, 3);
+        }
+        if(view.getId() == R.id.buttonApaCaldaBaiaMica){
+            startActivityForResult(intent, 4);
+        }
+        if(view.getId() == R.id.buttonApaCaldaBucatarie) {
+            startActivityForResult(intent, 5);
+        }
 
 }}
